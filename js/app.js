@@ -3,7 +3,7 @@
     client_id: 'c6e1e2a98490d428460f8d36af919bb4'
   });
 
-  let $nowPlaying = $('#now-playing');
+  const $controlsContainer = $('#controls-container');
   let showHelper = true;
   let queue = [];
   $('#enter-site').click(function() {
@@ -234,7 +234,7 @@
     }
 
     // set mouse x and y props and looper ticker
-    window.addEventListener( "mousemove", onMouseMove, false );
+    $(window).mousemove(onMouseMove);
     ticker = setInterval( looper, 1000 / 400);
   }
 
@@ -333,6 +333,7 @@
     }
   };
 
+  // functionality for last, play, pause, next
   function prepQueue() {
     for (let i = 0; i < queue.length; i++) {
       let currentIframe = queue[i].id;
@@ -341,24 +342,75 @@
       let nextWidget = SC.Widget(nextIframe);
       currentWidget.bind(SC.Widget.Events.PLAY, function() {
         currentWidget.getCurrentSound(function(music){
-          let $link = $(`<a id="soundcloud-link" target="_blank" href=${music.permalink_url}><img src="img/soundcloud.png"></a>`);
-          $nowPlaying.text(`Now Playing: ${music.title}`);
-          $('body').append($nowPlaying);
-          $nowPlaying.append($link);
+          let $backButton = $('<a><img class="control" id="back" \
+            src="img/back.png"</a>');
+          let $playButton = $('<a><img class="control" id="play" \
+            src="img/play.png"></a>');
+          let $forwardButton = $('<a><img class="control" id="forward" \
+            src="img/forward.png"></a>"');
+          let $link = $(`<a id="soundcloud-link" target="_blank" \
+            href=${music.permalink_url}><img src="img/soundcloud.png"></a>`);
+          let $nowPlaying = (`<p>Now Playing: ${music.title}</p>`);
+          $controlsContainer.empty();
+          $controlsContainer.append($nowPlaying, $backButton, $playButton, $forwardButton, $link);
+
+          if (i === 0) {
+            let previousIframe = queue[queue.length - 1].id;
+            let previousWidget = SC.Widget(previousIframe);
+            $('#back').click(function() {
+              currentWidget.seekTo(0);
+              currentWidget.pause();
+              previousWidget.play();
+            });
+          } else if (i >= 1) {
+            let previousIframe = queue[i - 1].id;
+            let previousWidget = SC.Widget(previousIframe);
+            $('#back').click(function() {
+              currentWidget.seekTo(0);
+              currentWidget.pause();
+              previousWidget.play();
+            });
+          }
+
+          // moves to next song
+          $('#forward').click(function() {
+            currentWidget.seekTo(0);
+            currentWidget.pause();
+            nextWidget.play();
+          });
+
+          // pauses current song
+          $('#play').click(function() {
+            $('#play').attr('src', 'img/pause.png');
+            currentWidget.seekTo(0);
+            currentWidget.pause();
+            // play current song
+            $('#play').click(function() {
+              $('#play').attr('src', 'img/play.png');
+              currentWidget.play();
+            });
+          });
         });
       });
 
+      // plays next song when current song is finished
       currentWidget.bind(SC.Widget.Events.FINISH, function() {
         nextWidget.play();
       });
     }
-    Materialize.toast('check', 1000);
   }
 
   // when user clicks submit...
   $($genreList).click(event => {
-    $nowPlaying.text('');
+    // when new genre is shown, clear contents of previously playing
+    $controlsContainer.empty();
+
+    /* must delete old iframes for each new ajax request in order for 'binded'
+       events to work in the 'prepQueue' function
+    */
     $('.frame').remove();
+
+    // contains user's selection. Will be used in '$xhrGenre' on line 412
     const genre = event.target.textContent;
 
     /* fetches the json data for the top 50 tracks currently on soundcloud
@@ -371,7 +423,9 @@
         return;
       }
 
+      // generate iframes
       iframeGenerator(tracks);
+      // get queue ready
       prepQueue();
     });
 
