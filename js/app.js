@@ -335,6 +335,7 @@
 
   // functionality for last, play, pause, next
   function prepQueue() {
+    console.log(queue);
     for (let i = 0; i < queue.length; i++) {
       let currentIframe = queue[i].id;
       let currentWidget = SC.Widget(currentIframe);
@@ -345,7 +346,7 @@
           let $backButton = $('<a><img class="control" id="back" \
             src="img/back.png"</a>');
           let $playButton = $('<a><img class="control" id="play" \
-            src="img/play.png"></a>');
+            src="img/pause.png"></a>');
           let $forwardButton = $('<a><img class="control" id="forward" \
             src="img/forward.png"></a>"');
           let $link = $(`<a id="soundcloud-link" target="_blank" \
@@ -362,7 +363,7 @@
               currentWidget.pause();
               previousWidget.play();
             });
-          } else if (i >= 1) {
+          } else {
             let previousIframe = queue[i - 1].id;
             let previousWidget = SC.Widget(previousIframe);
             $('#back').click(function() {
@@ -381,12 +382,11 @@
 
           // pauses current song
           $('#play').click(function() {
-            $('#play').attr('src', 'img/pause.png');
-            currentWidget.seekTo(0);
+            $('#play').attr('src', 'img/play.png');
             currentWidget.pause();
             // play current song
             $('#play').click(function() {
-              $('#play').attr('src', 'img/play.png');
+              $('#play').attr('src', 'img/pause.png');
               currentWidget.play();
             });
           });
