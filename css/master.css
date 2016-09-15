@@ -17,17 +17,7 @@ body {
   -webkit-animation-duration: 3s;
 }
 
-#enter-site {
-  text-transform: uppercase;
-  background: #EB3349;
-  border: 1px solid white;
-  color: white;
-  width: 200px;
-  height: 60px;
-  letter-spacing: 1.5px;
-}
-
-#enter-site:hover {
+#enter-button:hover {
   border: 3px solid white;
   transition: .5s ease all;
 }
@@ -57,7 +47,7 @@ body {
 }
 
 #close-menu:hover,
-#close-about:hover {
+#close-info:hover {
   cursor: pointer;
 }
 
@@ -117,14 +107,15 @@ body {
   font-weight: 100;
 }
 
-#genre-button {
+#genre-button,
+#enter-button {
   margin-top: 40px;
   height: 75px;
   width: 225px;
   border: 1px solid white;
   background: #EB3349;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 4px;
 }
 
 #genre-button:hover {
@@ -162,7 +153,7 @@ body {
   padding-top: 25px;
 }
 
-#close-about {
+#close-info {
   position: fixed;
   right: 5px;
   top: 5px;
