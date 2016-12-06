@@ -1,25 +1,18 @@
 body {
   height: 100%;
-  background: #2980b9; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #2980b9 , #2c3e50); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #2980b9 , #2c3e50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: black;
   overflow-x: hidden;
 }
 
 /*************** ENTERING SITE ***************/
 
 #message {
-  margin-top: 300px;
+  margin-top: 200px;
   text-align: center;
   font-size: 24px;
   color: white;
   font-weight: 100;
   -webkit-animation-duration: 3s;
-}
-
-#enter-button:hover {
-  border: 3px solid white;
-  transition: .5s ease all;
 }
 
 #content {
@@ -63,7 +56,7 @@ body {
 }
 
 .genre-item {
-  border-left: 1px solid #ff7700;
+  border-left: 1px solid  #6600CC;
   text-align: left;
   padding: 10px 0 10px 15px;
 }
@@ -110,17 +103,12 @@ body {
 #genre-button,
 #enter-button {
   margin-top: 40px;
-  height: 75px;
+  height: 60px;
+  line-height: 60px;
   width: 225px;
   border: 1px solid white;
-  background: #EB3349;
-  text-transform: uppercase;
-  letter-spacing: 4px;
-}
-
-#genre-button:hover {
-  border: 3px solid white;
-  transition: .8s ease all;
+  background: #6600CC;
+  font-size: 24px;
 }
 
 .helper {
@@ -163,24 +151,6 @@ body {
 .about {
   width: 560px;
   margin: 0 auto;
-}
-
-span,
-.goals {
-  color: #2980b9;
-}
-
-.goals {
-  font-weight: 100;
-  font-size: 16px;
-}
-
-.goals-list {
-  padding-left: 0;
-}
-
-.goals-list li {
-  margin-left: 35px;
 }
 
 /*************** CAROUSEL ***************/
@@ -253,7 +223,8 @@ span,
   bottom: 0;
   width: 100%;
   height: 60px;
-  background: black;
+  border-top: 1px solid #6600CC;
+  background:  #191b1c;
   color: white;
   padding-left: 25px;
   font-size: 18px;
