@@ -3,6 +3,12 @@
     client_id: 'c6e1e2a98490d428460f8d36af919bb4'
   });
 
+  $('.instructions2').hide().delay(4000).fadeIn(5000);
+  $('#enter-button').hide().delay(4200).fadeIn(5000);
+
+  $('.instructions').textillate({ in: { effect: 'fadeIn' } });
+
+
   const genres = {genre1: 'alternativerock', genre2: 'ambient', genre3: 'classical', genre4: 'country', genre5: 'danceedm', genre6: 'deephouse', genre7: 'disco', genre8: 'drumbeats', genre9: 'dubstep', genre10: 'electronic', genre11: 'folksingersongwriter', genre12: 'hiphoprap', genre13: 'house', genre14: 'indie', genre15: 'jazzblues', genre16: 'latin', genre17: 'metal', genre18: 'piano', genre19: 'pop', genre20: 'rbsoul', genre21: 'reggae', genre22: 'reggaeton', genre23: 'rock', genre24: 'soundtrack', genre25: 'techno', genre26: 'trance', genre27: 'trap', genre28: 'triphop', genre29: 'world'};
   const $genreMenu = $('<div class="animated fadeInLeft" id="genre-menu">');
   const $genreList = $('<ul class="animated fadeInLeft center" \
@@ -40,7 +46,7 @@
     $('#message').fadeOut();
     $('#content').delay(500).fadeIn();
     // displays intial carousel after user clicks 'enter'
-    const initialCarousel = ((() => {
+    const initialCarousel = (() => {
       // ajax request for top 50 electronic songs on soundcloud charts
       // https://soundcloud.com/charts/top?genre=electronic
       const electronicURL = 'kind=top&genre=soundcloud%3Agenres%3Aelectronic&client';
@@ -59,7 +65,7 @@
       $xhrElectronicMusic.fail(err => {
         console.error(err);
       });
-    }))();
+    })();
   };
 
   $('#enter-button').click(revealContent);
