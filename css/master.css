@@ -1,13 +1,13 @@
 body {
   height: 100%;
-  background: black;
+  background: #0d0d0d;
   overflow-x: hidden;
 }
 
 /*************** ENTERING SITE ***************/
 
 #message {
-  margin-top: 200px;
+  margin-top: 250px;
   text-align: center;
   font-size: 24px;
   color: white;
@@ -36,7 +36,7 @@ body {
 #close-menu {
   position: fixed;
   top: 5px;
-  left: 5px;
+  left: 247px;
 }
 
 #close-menu:hover,
@@ -96,20 +96,78 @@ body {
 
 .instructions {
   margin: 0;
-  font-size: 36px;
+  font-size: 24px;
   font-weight: 100;
 }
 
-#genre-button,
-#enter-button {
-  margin-top: 40px;
-  height: 60px;
-  line-height: 60px;
-  width: 180px;
-  border: 1px solid white;
-  background: #6600CC;
-  font-size: 24px;
+.genre-instructions {
+  font-size: 20px;
 }
+
+#enter-button,
+#genre-button {
+  background: none;
+  border: 1px solid white;
+  color: white;
+  font-family: 'Avenir-Light', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  position: relative;
+  width: 160px;
+	height: 50px;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: .35s;
+  line-height: 50px;
+}
+#enter-button:hover,
+#genre-button:hover {
+  color: white;
+  border: none;
+}
+
+#enter-button:hover::after,
+#genre-button:hover::after {
+  transform: translateX(-16%) rotate(12deg);
+}
+
+#enter-button:after,
+#genre-button:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -10px;
+  width: 270%;
+  height: 420%;
+  background: #6600cc;
+  z-index: -1;
+  transform-origin: bottom center;
+  transform: translateX(calc(-105%)) rotate(12deg);
+  transition: transform .35s;
+}
+
+
+/*#genre-button,
+#enter-button {
+  margin-top: 10px;
+  height: 50px;
+  line-height: 50px;
+  width: 160px;
+  border: 1px solid white;
+  background: none;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+}
+
+#genre-button:hover,
+#enter-button:hover {
+  background: white;
+  color: rgba(0, 0, 0, .7);
+  transition: .5s ease all;
+  box-shadow: 0 1px 28px rgba(255,255,255,0.25), 0 1px 1px rgba(255,255,255,0.22);
+}*/
 
 .helper {
   color: #e6e6e6;

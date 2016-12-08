@@ -3,11 +3,11 @@
     client_id: 'c6e1e2a98490d428460f8d36af919bb4'
   });
 
-  $('.instructions2').hide().delay(4000).fadeIn(5000);
-  $('#enter-button').hide().delay(4200).fadeIn(5000);
+  $('.instructions2').hide().delay(6000).fadeIn(1000);
+  $('#enter-button').hide().delay(6000).fadeIn(1000);
 
   $('.instructions').textillate({ in: { effect: 'fadeIn' } });
-
+  $('.instructions').delay(5000).fadeOut('slow');
 
   const genres = {genre1: 'alternativerock', genre2: 'ambient', genre3: 'classical', genre4: 'country', genre5: 'danceedm', genre6: 'deephouse', genre7: 'disco', genre8: 'drumbeats', genre9: 'dubstep', genre10: 'electronic', genre11: 'folksingersongwriter', genre12: 'hiphoprap', genre13: 'house', genre14: 'indie', genre15: 'jazzblues', genre16: 'latin', genre17: 'metal', genre18: 'piano', genre19: 'pop', genre20: 'rbsoul', genre21: 'reggae', genre22: 'reggaeton', genre23: 'rock', genre24: 'soundtrack', genre25: 'techno', genre26: 'trance', genre27: 'trap', genre28: 'triphop', genre29: 'world'};
   const $genreMenu = $('<div class="animated fadeInLeft" id="genre-menu">');
@@ -53,10 +53,6 @@
       const $xhrElectronicMusic = $.getJSON(`${corsURL}${chartsURL}${electronicURL}${clientId}`);
 
       $xhrElectronicMusic.done(tracks => {
-        if ($xhrElectronicMusic.status !== 200) {
-          return;
-        }
-
         initializeCarousel();
         iframeGenerator(tracks);
         prepQueue();
@@ -230,14 +226,21 @@
           continue;
         }
       }
+
       const playerURL = 'https://w.soundcloud.com/player/?visual=true&url=';
       const layout = 'width="100%" height="400" scrolling="no" frameborder="no"';
       let trackURL = `${tracks.collection[randomTrack].track.permalink_url}`
       let url = `${playerURL}${trackURL}`;
-      let $iframe = $(`<iframe class="frame" id="iframe${i}" src=${url} ${layout}></iframe>`);
+      let $iframe = $(`<iframe class="frame" id="iframe${i}" ${layout}></iframe>`);
+      $($iframe).load(function() {
+        console.log('loaded!');
+      });
+
+      $($iframe).attr({
+        src: url
+      });
 
       $(`#track${i}`).append($iframe);
-
       queue.push(document.getElementById(`iframe${i}`));
     }
   };
